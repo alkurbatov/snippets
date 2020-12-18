@@ -24,6 +24,7 @@ set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -DDEBUG")
 
 set(Solutions
     strong_password_generator
+    tokenize
     weak_password_generator
 )
 
