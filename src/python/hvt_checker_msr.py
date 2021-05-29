@@ -31,7 +31,7 @@ class MSR:
                 return (val & 0xffffffff, val >> 32)
 
         except Exception as err:
-            print("Failed to read MSR: {0}".format(repr(err)), file=sys.stderr)
+            print(f"Failed to read MSR: {repr(err)}", file=sys.stderr)
             return 0, 0
 
 
