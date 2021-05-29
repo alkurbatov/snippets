@@ -2,7 +2,7 @@ import os
 import sys
 
 
-class MSR(object):
+class MSR:
     """
     Represents Model-Specific Registers (MSR), provide an ability
     to read data by specific register from MSR file.
@@ -30,12 +30,12 @@ class MSR(object):
                 val = struct.unpack('Q', src.read(8))[0]
                 return (val & 0xffffffff, val >> 32)
 
-        except Exception, err:
-            print >> sys.stderr, "Failed to read MSR: ", repr(err)
+        except Exception as err:
+            print("Failed to read MSR: {0}".format(repr(err)), file=sys.stderr)
             return 0, 0
 
 
-class CPU(object):
+class CPU:
     """
     Represents generic CPU, provide useful contants and access to MSR.
     """
@@ -142,11 +142,12 @@ class AMD(CPU):
 def main():
     """
     Show general information about virtualization support
-    of the CPU in the system.
+    of the CPU in Linux system.
     """
 
-    print >> sys.stdout, CPU.get()
+    print(CPU.get(), file=sys.stdout)
     return 0
+
 
 if __name__ == "__main__":
     sys.exit(main())
