@@ -3,6 +3,10 @@ import traceback
 
 
 def wrapper3():
+    print('This is callstack:')
+    traceback.print_stack()
+    print()
+
     raise ValueError('Oops')
 
 
@@ -15,6 +19,7 @@ def wrapper1():
         wrapper2()
 
     except ValueError:
+        print('This is exception traceback:')
         print(traceback.print_exception(*sys.exc_info()))
 
 
