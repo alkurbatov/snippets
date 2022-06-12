@@ -24,11 +24,11 @@ class MSR:
         import struct
 
         try:
-            with open(self.msr_location, 'r', 0) as src:
+            with open(self.msr_location, "r", 0) as src:
                 src.seek(index)
 
-                val = struct.unpack('Q', src.read(8))[0]
-                return (val & 0xffffffff, val >> 32)
+                val = struct.unpack("Q", src.read(8))[0]
+                return (val & 0xFFFFFFFF, val >> 32)
 
         except Exception as err:
             print(f"Failed to read MSR: {repr(err)}", file=sys.stderr)
@@ -43,9 +43,9 @@ class CPU:
     def __init__(self):
         self.msr = MSR()
 
-        self.MSR_EFER = 0xc0000080
-        self.MSR_IA32_FEATURE_CONTROL = 0x3a
-        self.MSR_IA32_VMX_PROCBASED_CTLS2 = 0x48b
+        self.MSR_EFER = 0xC0000080
+        self.MSR_IA32_FEATURE_CONTROL = 0x3A
+        self.MSR_IA32_VMX_PROCBASED_CTLS2 = 0x48B
 
     @staticmethod
     def get():
@@ -56,7 +56,7 @@ class CPU:
 
         with open("/proc/cpuinfo") as src:
             for line in src.readlines():
-                if line.startswith('vendor_id') is False:
+                if line.startswith("vendor_id") is False:
                     continue
 
                 if "GenuineIntel" in line:
@@ -98,11 +98,13 @@ class Intel(CPU):
         return all(val & (1 << i) for i in [1, 7])
 
     def __str__(self):
-        return os.linesep.join([
-            "Intel processor:",
-            "\tVMX: %s" % self.vt_enabled(),
-            "\tEPT and Unrestricted guest: %s" % self.full_featured()
-        ])
+        return os.linesep.join(
+            [
+                "Intel processor:",
+                "\tVMX: %s" % self.vt_enabled(),
+                "\tEPT and Unrestricted guest: %s" % self.full_featured(),
+            ]
+        )
 
 
 class AMD(CPU):
@@ -132,11 +134,13 @@ class AMD(CPU):
         pass
 
     def __str__(self):
-        return os.linesep.join([
-            "AMD processor:",
-            "\tSVM: %s" % self.vt_enabled(),
-            "\tRVI: %s" % self.full_featured()
-        ])
+        return os.linesep.join(
+            [
+                "AMD processor:",
+                "\tSVM: %s" % self.vt_enabled(),
+                "\tRVI: %s" % self.full_featured(),
+            ]
+        )
 
 
 def main():

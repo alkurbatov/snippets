@@ -1,6 +1,5 @@
 import contextlib
 import os
 
-
 with contextlib.suppress(FileNotFoundError):
-    os.remove('somefile.tmp')
+    os.remove("somefile.tmp")

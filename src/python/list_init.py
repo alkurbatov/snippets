@@ -1,5 +1,5 @@
 # Init a list with X empty values:
-new_list = [None]*5
+new_list = [None] * 5
 print(new_list)
 
 # Init a list with X empty lists:

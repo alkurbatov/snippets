@@ -18,7 +18,7 @@ for char in TEXT:
 """
 
 linear_search_using_regexp = """
-re.search(r'\s', TEXT)
+re.search(r'\\s', TEXT)
 """
 
 linear_search_using_compiled_regexp = """
