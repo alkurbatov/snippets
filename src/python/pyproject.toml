@@ -1,0 +1,40 @@
+[tool.poetry]
+name = "python snipptes"
+version = "0.0.1"
+description = "Handy snippets for python code."
+authors = ["Alexander Kurbatov <sir.alkurbatov@yandex.ru>"]
+
+[tool.poetry.dependencies]
+python = "^3.9"
+
+[tool.poetry.dev-dependencies]
+isort = "^5.10.1"
+flake8 = "^4.0.1"
+mypy = "^0.961"
+black = "^22.3.0"
+autopep8 = "^1.6.0"
+
+[tool.black]
+line-length = 88
+
+[tool.autopep8]
+max_line_length = 88
+in-place = true
+recursive = true
+aggressive = 3
+select = ["E203", "W503"]
+
+[tool.isort]
+profile = "black"
+line_length = 88
+wrap_length = 88
+multi_line_output = 3
+combine_as_imports = true
+force_alphabetical_sort_within_sections = true
+overwrite_in_place = true
+
+[tool.mypy]
+python_version = "3.8"
+warn_return_any = true
+warn_unused_configs = true
+warn_redundant_casts = true
