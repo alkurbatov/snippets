@@ -2,15 +2,15 @@ import collections
 
 
 class Stats:
-    def __init__(self):
-        self.men = 0
-        self.women = 0
+    def __init__(self) -> None:
+        self.men: int = 0
+        self.women: int = 0
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         return f"men: {self.men}, women: {self.women}"
 
 
-stats = collections.defaultdict(lambda: Stats())
+stats: dict = collections.defaultdict(lambda: Stats())
 
 print("Accessing an object first time:")
 print(f"{stats['Russia']}\n")
