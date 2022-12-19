@@ -27,7 +27,7 @@ class MSR:
             with open(self.msr_location, "r", 0) as src:
                 src.seek(index)
 
-                val = struct.unpack("Q", src.read(8))[0]
+                val = struct.unpack("Q", src.read(8))[0]  # type: ignore
                 return (val & 0xFFFFFFFF, val >> 32)
 
         except Exception as err:

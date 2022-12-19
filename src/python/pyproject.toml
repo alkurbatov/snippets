@@ -35,6 +35,17 @@ overwrite_in_place = true
 
 [tool.mypy]
 python_version = "3.8"
+follow_imports = "normal"
 warn_return_any = true
-warn_unused_configs = true
 warn_redundant_casts = true
+warn_unused_configs = true
+warn_unused_ignores = true
+check_untyped_defs = true
+no_implicit_reexport = true
+namespace_packages = true
+
+[[tool.mypy.overrides]]
+module = [
+    "humanize.*",
+]
+ignore_missing_imports = true
