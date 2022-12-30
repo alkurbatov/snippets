@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+#
+# Pick random TCP port and hope that it is unoccupied.
+
+set -euxo pipefail
+
+function get_random_port() {
+    awk 'BEGIN{srand(); print int(rand() * (63000-2000)) + 2000 }'
+}
+
+get_random_port
