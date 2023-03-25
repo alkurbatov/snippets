@@ -1,2 +1,6 @@
 [flake8]
 max-line-length = 88
+
+ignore =
+    # An unused argument starting with an underscore
+    U101,
