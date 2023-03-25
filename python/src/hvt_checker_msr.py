@@ -31,7 +31,7 @@ class MSR:
                 return (val & 0xFFFFFFFF, val >> 32)
 
         except Exception as err:
-            print(f"Failed to read MSR: {repr(err)}", file=sys.stderr)
+            print(f"Failed to read MSR: {err!r}", file=sys.stderr)
             return 0, 0
 
 
@@ -55,7 +55,7 @@ class CPU:
         """
 
         with open("/proc/cpuinfo") as src:
-            for line in src.readlines():
+            for line in src:
                 if line.startswith("vendor_id") is False:
                     continue
 
@@ -95,7 +95,7 @@ class Intel(CPU):
         """
 
         val = self.msr.read(self.MSR_IA32_VMX_PROCBASED_CTLS2)[1]
-        return all(val & (1 << i) for i in [1, 7])
+        return all(val & (1 << i) for i in (1, 7))
 
     def __str__(self):
         return os.linesep.join(

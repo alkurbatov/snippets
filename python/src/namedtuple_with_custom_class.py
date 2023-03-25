@@ -10,7 +10,7 @@ class Stats:
         return f"men: {self.men}, women: {self.women}"
 
 
-stats: dict = collections.defaultdict(lambda: Stats())
+stats: dict = collections.defaultdict(Stats)
 
 print("Accessing an object first time:")
 print(f"{stats['Russia']}\n")

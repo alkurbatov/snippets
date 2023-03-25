@@ -2,8 +2,10 @@
 # flags at once in Python
 x, y, z = 0, 1, 0
 
-if x == 1 or y == 1 or z == 1:
-    print("passed")
+# NB (alkurbatov): While this method is ok in general,
+# better to use examples below.
+# if x == 1 or y == 1 or z == 1:
+#    print("passed")
 
 if 1 in (x, y, z):
     print("passed")

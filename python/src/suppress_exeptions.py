@@ -1,5 +1,5 @@
 import contextlib
-import os
+from pathlib import Path
 
 with contextlib.suppress(FileNotFoundError):
-    os.remove("somefile.tmp")
+    Path("somefile.tmp").unlink()
