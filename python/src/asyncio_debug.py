@@ -14,6 +14,7 @@ def handle_exception(_loop: asyncio.AbstractEventLoop, context: dict[str, str]) 
 async def main() -> None:
     loop = asyncio.get_event_loop()
     loop.set_debug(True)
+    loop.slow_callback_duration = 0.2  # in seconds
     loop.set_exception_handler(handle_exception)
 
     warnings.simplefilter("always", ResourceWarning)
