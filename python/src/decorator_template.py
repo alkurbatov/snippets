@@ -33,7 +33,7 @@ def decorator_with_args(_some_arg: Any) -> DecoratorFactory:
 
     def actual_decorator(func: DecoratedFunction) -> DecoratedFunction:
         @functools.wraps(func)
-        async def wrapper(*args, **kwargs) -> Any:
+        def wrapper(*args, **kwargs) -> Any:
             # Do something before
             value = func(*args, **kwargs)
             # Do something after
