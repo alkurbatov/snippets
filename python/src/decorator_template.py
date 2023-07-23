@@ -6,15 +6,17 @@ https://mypy.readthedocs.io/en/stable/generics.html#declaring-decorators
 """
 
 import functools
-from typing import Any, Awaitable, Callable, cast, TypeVar
+from typing import Any, Awaitable, Callable, cast, TypeAlias, TypeVar
 
 DecoratedFunction = TypeVar("DecoratedFunction", bound=Callable[..., Any])
-DecoratorFactory = Callable[[DecoratedFunction], DecoratedFunction]
+DecoratorFactory: TypeAlias = Callable[[DecoratedFunction], DecoratedFunction]
 
 AsyncDecoratedFunction = TypeVar(
     "AsyncDecoratedFunction", bound=Callable[..., Awaitable[Any]]
 )
-AsyncDecoratorFactory = Callable[[AsyncDecoratedFunction], AsyncDecoratedFunction]
+AsyncDecoratorFactory: TypeAlias = Callable[
+    [AsyncDecoratedFunction], AsyncDecoratedFunction
+]
 
 
 def decorator(func: DecoratedFunction) -> DecoratedFunction:
