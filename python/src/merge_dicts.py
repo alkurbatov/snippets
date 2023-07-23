@@ -6,4 +6,7 @@ y = {"b": 3, "c": 4}
 # duplicates from left to right.
 #
 # Works in Python 3.5+
-print({**x, **y})
+# print({**x, **y})
+#
+# Works in Python 3.11
+print(x | y)

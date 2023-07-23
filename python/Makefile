@@ -1,3 +1,9 @@
+.PHONY: install
+install:
+	poetry env use 3.11
+	poetry install
+
+.PHONY: lint
 lint:
 	poetry run black --check ./src
 	poetry run isort --check ./src
@@ -5,10 +11,8 @@ lint:
 	poetry run flake8 ./src
 	poetry run mypy ./src
 	poetry run refurb ./src
-.PHONY: lint
 
+.PHONY: format
 format:
 	poetry run black ./src
-	poetry run autopep8 ./src
 	poetry run isort ./src
-.PHONY: format

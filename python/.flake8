@@ -1,6 +1,11 @@
 [flake8]
 max-line-length = 88
 
-ignore =
+exclude =
+    .venv,
+
+extend-ignore =
+    # Whitespace before ':'
+    E203,
     # An unused argument starting with an underscore
     U101,
