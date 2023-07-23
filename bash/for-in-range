@@ -1,0 +1,11 @@
+#!/bin/bash
+#
+# Execute a command in a cycle several times.
+
+n=0
+until [ "$n" -ge 3 ]
+do
+  echo "Tick"
+  ((n++))
+  sleep 1
+done
