@@ -6,68 +6,63 @@ https://mypy.readthedocs.io/en/stable/generics.html#declaring-decorators
 """
 
 import functools
-from typing import Any, Awaitable, Callable, cast, TypeAlias, TypeVar
+from typing import Any, Awaitable, Callable, ParamSpec, TypeVar
 
-DecoratedFunction = TypeVar("DecoratedFunction", bound=Callable[..., Any])
-DecoratorFactory: TypeAlias = Callable[[DecoratedFunction], DecoratedFunction]
-
-AsyncDecoratedFunction = TypeVar(
-    "AsyncDecoratedFunction", bound=Callable[..., Awaitable[Any]]
-)
-AsyncDecoratorFactory: TypeAlias = Callable[
-    [AsyncDecoratedFunction], AsyncDecoratedFunction
-]
+P = ParamSpec("P")
+T = TypeVar("T")
 
 
-def decorator(func: DecoratedFunction) -> DecoratedFunction:
+def decorator(func: Callable[P, T]) -> Callable[P, T]:
     @functools.wraps(func)
-    def wrapper(*args, **kwargs) -> Any:
+    def wrapper(*args: P.args, **kwargs: P.kwargs) -> T:
         # Do something before
         value = func(*args, **kwargs)
         # Do something after
         return value
 
-    return cast(DecoratedFunction, wrapper)
+    return wrapper
 
 
-def decorator_with_args(_some_arg: Any) -> DecoratorFactory:
+def decorator_with_args(_some_arg: Any) -> Callable[[Callable[P, T]], Callable[P, T]]:
     # Do something with _some_arg.
 
-    def actual_decorator(func: DecoratedFunction) -> DecoratedFunction:
+    def actual_decorator(func: Callable[P, T]) -> Callable[P, T]:
         @functools.wraps(func)
-        def wrapper(*args, **kwargs) -> Any:
+        def wrapper(*args: P.args, **kwargs: P.kwargs) -> T:
             # Do something before
             value = func(*args, **kwargs)
             # Do something after
             return value
 
-        return cast(DecoratedFunction, wrapper)
+        return wrapper
 
     return actual_decorator
 
 
-def async_decorator(func: AsyncDecoratedFunction) -> AsyncDecoratedFunction:
+def async_decorator(func: Callable[P, Awaitable[T]]) -> Callable[P, Awaitable[T]]:
     @functools.wraps(func)
-    async def wrapper(*args, **kwargs) -> Any:
+    async def wrapper(*args: P.args, **kwargs: P.kwargs) -> T:
         # Do something before
         value = await func(*args, **kwargs)
         # Do something after
         return value
 
-    return cast(AsyncDecoratedFunction, wrapper)
+    return wrapper
 
 
-def async_decorator_with_args(_some_arg: Any) -> AsyncDecoratorFactory:
+def async_decorator_with_args(
+    _some_arg: Any,
+) -> Callable[[Callable[P, Awaitable[T]]], Callable[P, Awaitable[T]]]:
     # Do something with _some_arg.
 
-    def actual_decorator(func: AsyncDecoratedFunction) -> AsyncDecoratedFunction:
+    def actual_decorator(func: Callable[P, Awaitable[T]]) -> Callable[P, Awaitable[T]]:
         @functools.wraps(func)
-        async def wrapper(*args, **kwargs) -> Any:
+        async def wrapper(*args: P.args, **kwargs: P.kwargs) -> T:
             # Do something before
             value = await func(*args, **kwargs)
             # Do something after
             return value
 
-        return cast(AsyncDecoratedFunction, wrapper)
+        return wrapper
 
     return actual_decorator
