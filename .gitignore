@@ -1,3 +1,7 @@
+# OS X trash
+.DS_Store
+
+# Build artifacts
 build/
 
 # IDEs
