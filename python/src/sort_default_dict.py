@@ -1,4 +1,5 @@
 import collections
+import operator
 
 stats = collections.defaultdict(int)
 
@@ -8,4 +9,4 @@ stats["bbb"] = 5
 stats["ddd"] = 0
 
 # Sort defaultdict by keys.
-print(sorted(stats.items(), key=lambda kv: kv[1], reverse=True))
+print(sorted(stats.items(), key=operator.itemgetter(1), reverse=True))
