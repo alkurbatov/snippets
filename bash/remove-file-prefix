@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+#
+# Remove refix from matching files.
+
+set -euxo pipefail
+
+PREFIX=XXX_
+
+for f in "${PREFIX}"*; do
+    mv "$f" "${f#"${PREFIX}"}";
+done
