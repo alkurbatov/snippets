@@ -1,1 +1,0 @@
-((nil (eval . (editorconfig-mode))))
