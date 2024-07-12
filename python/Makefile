@@ -1,6 +1,6 @@
 .PHONY: install
 install:
-	poetry env use 3.11
+	poetry env use 3.12
 	poetry install
 
 .PHONY: lint

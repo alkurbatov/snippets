@@ -5,25 +5,30 @@ description = "Handy snippets for python code."
 authors = ["Alexander Kurbatov <sir.alkurbatov@yandex.ru>"]
 
 [tool.poetry.dependencies]
-python = "^3.11"
+python = "^3.12"
 
 [tool.poetry.dev-dependencies]
-black = "^23.7.0"
-flake8 = "^6.1.0"
-flake8-bugbear = "^23.12.2"
-flake8-simplify = "^0.21.0"
-flake8-unused-arguments = "^0.0.13"
-isort = "^5.13.2"
-mypy = "^1.8.0"
-refurb = "^1.28.0"
+black = "^24.4"
+flake8 = "^7.0"
+flake8-annotations-complexity = "^0.0"
+flake8-bugbear = "^24.4"
+flake8-cognitive-complexity = "^0.1"
+flake8-docstrings = "^1.7"
+flake8-eradicate = "^1.5"
+flake8-pytest-style = "^2.0"
+flake8-simplify = "^0.21"
+flake8-unused-arguments = "^0.0"
+isort = "^5.13"
+mypy = "^1.10"
+refurb = "^2.0"
 
 [tool.black]
 line-length = 88
-target-version = ["py311"]
+target-version = ["py312"]
 
 [tool.isort]
 profile = "black"
-py_version = 311
+py_version = 312
 line_length = 88
 wrap_length = 88
 multi_line_output = 3
@@ -32,7 +37,7 @@ force_alphabetical_sort_within_sections = true
 overwrite_in_place = true
 
 [tool.mypy]
-python_version = "3.11"
+python_version = "3.12"
 follow_imports = "normal"
 warn_return_any = true
 warn_redundant_casts = true
@@ -50,4 +55,4 @@ module = [
 ignore_missing_imports = true
 
 [tool.refurb]
-python_version = "3.11"
+python_version = "3.12"
