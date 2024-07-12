@@ -1,28 +1,28 @@
+"""Show general information about virtualization support of the CPU in Linux system."""
+
 import os
+import struct
 import sys
 
 
 class MSR:
-    """
-    Represents Model-Specific Registers (MSR), provide an ability
-    to read data by specific register from MSR file.
+    """Represents Model-Specific Registers (MSR).
+
+    Provides an ability to read data by specific register from MSR file.
     """
 
     def __init__(self):
         self.msr_location = "/dev/cpu/0/msr"
 
-        if os.access(self.msr_location, os.R_OK) is False:
+        if not os.access(self.msr_location, os.R_OK):
             self.msr_location = "/dev/msr0"
 
     def read(self, index):
-        """
-        Read a 'index' register from MSR.
-        Return tuple of two integer numbers: first represents 31:0 bits,
+        """Read a 'index' register from MSR.
+
+        Returns tuple of two integer numbers: first represents 31:0 bits,
         second represents 63:32 bits.
         """
-
-        import struct
-
         try:
             with open(self.msr_location, "r", 0) as src:
                 src.seek(index)
@@ -36,8 +36,9 @@ class MSR:
 
 
 class CPU:
-    """
-    Represents generic CPU, provide useful contants and access to MSR.
+    """Represents generic CPU.
+
+    Provides useful contants and access to MSR.
     """
 
     def __init__(self):
@@ -49,14 +50,14 @@ class CPU:
 
     @staticmethod
     def get():
-        """
-        Return object representing current CPU. The object's type is
-        determined by vendor information extracted from /proc/cpuinfo.
-        """
+        """Return object representing current CPU.
 
+        The object's type is determined by vendor information
+        extracted from /proc/cpuinfo.
+        """
         with open("/proc/cpuinfo") as src:
             for line in src:
-                if line.startswith("vendor_id") is False:
+                if not line.startswith("vendor_id"):
                     continue
 
                 if "GenuineIntel" in line:
@@ -70,30 +71,27 @@ class CPU:
 
 
 class Intel(CPU):
-    """
-    Represents Intel processors. Allow to check support of hardware
-    virtualization (VT-x) and required CPU features using
-    Model-Specific Registers (MSR) as a data source.
+    """Represents Intel processors.
+
+    Allow to check support of hardware virtualization (VT-x) and
+    required CPU features using Model-Specific Registers (MSR) as a data source.
     For additional details please refer to 'Intel Software Developer's Manual
     Volume 3B: System Programming Guide, Part 2'.
     """
 
     def vt_enabled(self):
-        """
-        Check support of basic virtualization technology (VT-x) by checking
+        """Check support of basic virtualization technology (VT-x).
+
         VMX feature (2nd bit in MSR_IA32_FEATURE_CONTROL control).
         """
-
         val = self.msr.read(self.MSR_IA32_FEATURE_CONTROL)[0]
         return bool(val & (1 << 2))
 
     def full_featured(self):
-        """
-        Check support of 'Extended Page Tables (EPT)' and 'Unrestricted guest'
-        features (32+1 and 32+7 bits in MSR_IA32_VMX_PROCBASED_CTLS2
-        control respectively) enabled.
-        """
+        """Check 'Extended Page Tables (EPT)' and 'Unrestricted guest' are enabled.
 
+        32+1 and 32+7 bits in MSR_IA32_VMX_PROCBASED_CTLS2 control respectively.
+        """
         val = self.msr.read(self.MSR_IA32_VMX_PROCBASED_CTLS2)[1]
         return all(val & (1 << i) for i in (1, 7))
 
@@ -108,29 +106,26 @@ class Intel(CPU):
 
 
 class AMD(CPU):
-    """
-    Represents AMD processors. Allow to check support of hardware
-    virtualization (SVM) and required CPU features using
-    Model-Specific Registers (MSR) as a data source.
-    For additional details please refer to
-    'AMD64 Architecture Programmer's Manual'.
+    """Represents AMD processors.
+
+    Allow to check support of hardware virtualization (SVM) and required
+    CPU features using Model-Specific Registers (MSR) as a data source.
+    For additional details please refer to 'AMD64 Architecture Programmer's Manual'.
     """
 
     def vt_enabled(self):
-        """
-        Check support of basic virtualization technology (SVM) by checking
-        SVME feature (12th bit in MSR_EFER control) enabled.
-        """
+        """Check support of basic virtualization technology (SVM).
 
+        SVME feature (12th bit in MSR_EFER control).
+        """
         val = self.msr.read(self.MSR_EFER)[0]
         return bool(val & (1 << 12))
 
     def full_featured(self):
-        """
-        Check support of 'Rapid Virtualization Indexing (RVI)' feature
-        (32+1 bit in control) enabled.
-        """
+        """Check that 'Rapid Virtualization Indexing (RVI)' feature is enabled.
 
+        32+1 bit in control.
+        """
         pass
 
     def __str__(self):
@@ -144,11 +139,6 @@ class AMD(CPU):
 
 
 def main():
-    """
-    Show general information about virtualization support
-    of the CPU in Linux system.
-    """
-
     print(CPU.get(), file=sys.stdout)
     return 0
 

@@ -5,8 +5,8 @@ from typing import Any, Callable
 
 
 async def to_thread(func: Callable, /, *args, **kwargs) -> Any:
-    """Run blocking code in a separate thread with possibility to asynchroniously wait
-    for result.
+    """Run blocking code in a separate thread to asynchroniously wait for result.
+
     See: https://github.com/python/cpython/blob/main/Lib/asyncio/threads.py
 
     (!) Should be used on Python < 3.9, in other case please prefer asyncio.to_thread.

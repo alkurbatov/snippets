@@ -1,5 +1,4 @@
-"""Different ways of determing whether a string contains spaces
-with performance measures."""
+"""Different ways of determing whether a string contains spaces."""
 
 import re
 import timeit

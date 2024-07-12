@@ -1,10 +1,23 @@
 [flake8]
 max-line-length = 88
+docstring-convention = numpy
 
 exclude =
     .venv,
 
 extend-ignore =
+    # Missing docstring in public module
+    D100,
+    # Missing docstring in public class
+    D101,
+    # Missing docstring in public method
+    D102,
+    # Missing docstring in public function
+    D103,
+    # Missing docstring in public package
+    D104,
+    # Missing docstring in magic method
+    D105,
     # Whitespace before ':'
     E203,
     # An unused argument starting with an underscore

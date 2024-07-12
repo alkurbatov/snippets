@@ -1,4 +1,5 @@
 """Generate map 'index -> latin letter'. Convenient for Leetcode puzzles."""
+
 import string
 
 cipher = {}
