@@ -6,7 +6,6 @@
 //
 // heap.Push(&h, 10)
 // v := heap.Pop(&h).(int)
-//
 package snippets
 
 type Heap []int
