@@ -1,9 +1,12 @@
 #!/usr/bin/env bash
 #
-# Determine name of the process which called this script.
+# Determine name of the process which called this script and file location.
 
 set -euxo pipefail
 
+SCRIPT=$(readlink -f "$0")
+BASEDIR=$(dirname "$SCRIPT")
+
 CALLER=$(pgrep -P "$PPID")
 
-echo I was called by \'"${CALLER}"\'
+echo I was called by \'"${CALLER}"\' in "${BASEDIR}"
