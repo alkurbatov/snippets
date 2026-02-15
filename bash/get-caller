@@ -4,6 +4,6 @@
 
 set -euxo pipefail
 
-CALLER=$(ps ax | grep "^ *$PPID" | awk '{print $5}')
+CALLER=$(pgrep -P "$PPID")
 
 echo I was called by \'"${CALLER}"\'
