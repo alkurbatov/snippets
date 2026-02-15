@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 #
-# Take a string variable (e.g. address:port) and split it by delimeter.
-# This method works well only with simple strings which contains only one delimeter.
+# Take a string variable (e.g. address:port) and split it by delimiter.
+# This method works well only with simple strings which contains only one
+# delimeter.
 
 set -euxo pipefail
 

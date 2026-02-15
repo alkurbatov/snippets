@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #
-# Remove refix from matching files.
+# Remove prefix from matching files.
 
 set -euxo pipefail
 
