@@ -7,7 +7,7 @@ import (
 
 // entropySize count of bytes for generation of random symbol sequences.
 // The length is taken from recommendations in
-// // https://pkg.go.dev/golang.org/x/crypto/sha3#hdr-Recommendations
+// https://pkg.go.dev/golang.org/x/crypto/sha3#hdr-Recommendations
 const entropySize = 32
 
 const base32alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ234567"

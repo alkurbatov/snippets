@@ -10,7 +10,7 @@ int main()
                         "1234567890"
                         "!@#$%^&*()`~-_=+[{]{\\|;:'\",<.>/?");
 
-    srand(time(0)); //make it static if you need to call this gen function several time a row.
+    srand(time(0)); //make it static if you need to call this gen function several times in a row.
 
     for (size_t i = 0; i < 20; ++i)
     {
